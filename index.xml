@@ -7,9 +7,23 @@
     <language>en-us</language>
     <author>Eric Daniels</author>
     
-      <copyright>2015 Eric Daniels</copyright>
+      <copyright>2016 Eric Daniels</copyright>
     
-    <updated>Sun, 31 May 2015 15:53:52 EDT</updated>
+    <updated>Sat, 03 Dec 2016 14:02:25 EST</updated>
+    
+      
+        <item>
+          <title>Moving Hosts Again</title>
+          <link>https://erdaniels.com/2016/12/moving-again/</link>
+          <pubDate>Sat, 03 Dec 2016 14:02:25 EST</pubDate>
+          <author>Eric Daniels</author>
+          <guid>https://erdaniels.com/2016/12/moving-again/</guid>
+          <description>&lt;p&gt;Why spend money on hosting when you can just use github.io and point your domain at it? See: &lt;a href=&#34;https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-github-pages-site/&#34;&gt;Adding or removing a custom domain for your GitHub Pages site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I really only had my own server at Digital Ocean (oh yeah, I switched from AWS to them for ease of use for a stupid simple site like this) so that I could show off that I had an SSL cert. But really, do you need to trust that its me who wrote these blog posts? If I really cared, I could just use a digest for each post and have my public key live somewhere you can trust.&lt;/p&gt;
+</description>
+        </item>
+      
     
       
         <item>
@@ -18,7 +32,7 @@
           <pubDate>Sun, 31 May 2015 15:53:52 EDT</pubDate>
           <author>Eric Daniels</author>
           <guid>https://erdaniels.com/2015/05/fixing-debugging-golang-package-bug/</guid>
-          <description>&lt;p&gt;Text Yo Hey MongoDB&amp;rsquo;s product, MMS, uses Go for all of the agents that run on MMS (Monitoring, Backup, Automation) as well as for some small utilities. All of these binaries use the &lt;a href=&#34;https://github.com/winlabs/gowin32&#34;&gt;gowin32&lt;/a&gt; package in some form or another. I have recently begun working on a feature in the Automation agent that requires gowin32 and I noticed when writing code like the following that my binary would crash:&lt;/p&gt;
+          <description>&lt;p&gt;MongoDB&amp;rsquo;s product, MMS, uses Go for all of the agents that run on MMS (Monitoring, Backup, Automation) as well as for some small utilities. All of these binaries use the &lt;a href=&#34;https://github.com/winlabs/gowin32&#34;&gt;gowin32&lt;/a&gt; package in some form or another. I have recently begun working on a feature in the Automation agent that requires gowin32 and I noticed when writing code like the following that my binary would crash:&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
 
@@ -419,18 +433,6 @@ def problem_20(target):
 	
 print(problem_20(100))
 &lt;/code&gt;&lt;/pre&gt;</description>
-        </item>
-      
-    
-      
-        <item>
-          <title>Python</title>
-          <link>https://erdaniels.com/2011/07/python/</link>
-          <pubDate>Thu, 07 Jul 2011 16:53:36 &#43;0000</pubDate>
-          <author>Eric Daniels</author>
-          <guid>https://erdaniels.com/2011/07/python/</guid>
-          <description>&lt;p&gt;supports large integers out of the box. Looks like its time to learn a new language to solve these ProjectEuler problems. As much as I love C++, the memory management required in these problems becomes a heavy burden. Also my BigInt class is very slow since I haven&amp;rsquo;t implemented fast arithmetic methods. So why not use something that is already good code!&lt;/p&gt;
-</description>
         </item>
       
     
