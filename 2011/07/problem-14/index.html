@@ -1,0 +1,203 @@
+  <!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en-us'>
+<head>
+  <link href='http://gmpg.org/xfn/11' rel='profile'>
+  <meta http-equiv='content-type' content='text/html; charset=utf-8'>
+
+  
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+
+  <title> Problem 14  &middot; Eric Daniels - Software Engineer </title>
+
+  
+  <link href='/css/bootstrap-pagination.css' rel='stylesheet' type='text/css'>
+  <link href='/css/poole.css' rel='stylesheet' type='text/css'>
+  <link href='/css/syntax.css' rel='stylesheet' type='text/css'>
+  <link href='/css/hyde.css' rel='stylesheet' type='text/css'>
+  <link href='/css/highlightjs.css' rel='stylesheet' type='text/css'>
+  <link href='/css/solarized_dark.min.css' rel='stylesheet' type='text/css'>
+  <link href='/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400italic,700italic|Raleway:400,300' rel='stylesheet' type='text/css'>
+
+  
+  <script src='/js/highlight.js'></script>
+  <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  <script type='text/x-mathjax-config'>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: 'AMS'},
+           extensions: ['AMSmath.js', 'AMSsymbols.js'] }
+    }
+  });
+  </script>
+
+  <script type='text/x-mathjax-config'>
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+  </script>
+
+  
+  <link rel='apple-touch-icon-precomposed' sizes='144x144' href='/apple-touch-icon-144-precomposed.png'>
+  <link rel='shortcut icon' href='/favicon.png'>
+
+  
+  <link href='' rel='alternate' type='application/rss+xml' title='Eric Daniels - Software Engineer'/>
+
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+
+  
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-63597536-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+      <h1 class="brand"><a href="https://erdaniels.com">Eric Daniels</a></h1>
+      <p class="lead">
+         code; stuff; 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://erdaniels.com/blog/">Blog Posts</a></li>
+      
+    </ul>
+
+    <a href="https://www.facebook.com/EricDaniels"><i class="fa fa-facebook-square"></i></a>&nbsp;&nbsp;
+    <a href="https://github.com/edaniels"><i class="fa fa-github-square"></i></a>&nbsp;&nbsp;
+    <a href="https://www.linkedin.com/in/erdaniels"><i class="fa fa-linkedin-square"></i></a>&nbsp;&nbsp;
+    
+    <a href="https://twitter.com/ericrdaniels"><i class="fa fa-twitter-square"></i></a>&nbsp;&nbsp;
+
+    <p class="footnote">
+      Created with <a href="//gohugo.io">Hugo</a>
+      <br/>
+      <a href="//github.com/edaniels/erdanielsdotcom-theme">Theme</a> based off of <a href="//github.com/natefinch/npf">npf.io</a>
+      <br/>
+      &copy; 2016 Eric Daniels. All rights reserved.
+    </p>
+    
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+        <h1 class="post-title">Problem 14</h1>
+        <span class="post-date">Jul 3, 2011</span>
+
+        <blockquote>
+The following iterative sequence is defined for the set of positive integers:
+</blockquote>
+
+<blockquote>
+$
+n =
+\left\{
+    \begin{array}{ll}
+        \frac{n}{2}  & \mbox{if n is even} \\
+        3*n + 1 & \mbox{if n is odd}
+    \end{array}
+\right.
+$
+</blockquote>
+
+<blockquote>
+Using the rule above and starting with 13, we generate the following sequence:
+
+13  40  20  10  5  16  8  4  2  1
+It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+
+Which starting number, under one million, produces the longest chain?
+
+NOTE: Once the chain starts the terms are allowed to go above one million.
+</blockquote>
+
+<p></p>
+
+<p>Simple and quick brute force solution</p>
+
+<pre><code class="language-cpp">long long P14 (long long target)
+{
+	long long current = target;
+	long long chainLength = 0;
+	long long count = target;
+	long long longestChain[2] = {count, chainLength};
+
+	while (count &gt; 1)
+	{
+		while (current &gt; 1)
+		{
+			if (current % 2 == 0)
+				current /= 2;
+			else
+				current = (current*3) + 1;
+
+			chainLength++;
+		}
+
+		if (chainLength &gt; longestChain[1])
+		{
+			longestChain[0] = count;
+			longestChain[1] = chainLength;
+		}
+
+		count--;
+		current = count;
+		chainLength = 0;
+	}
+
+	return longestChain[0];
+}
+</code></pre>
+
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost") 
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'erdaniels';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the comments powered by <a href="http://disqus.com/?ref_noscript">Disqus.</a></noscript>
+      </div>
+    </div> 
+
+  </body>
+</html>

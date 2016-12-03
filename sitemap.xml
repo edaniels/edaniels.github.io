@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://erdaniels.com/2015/05/fixing-debugging-golang-package-bug/</loc>
+    <lastmod>2015-05-31T15:53:52-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2015/05/new-site/</loc>
+    <lastmod>2015-05-25T18:53:32-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2015/01/finding-the-device-name-of-the-root-partition/</loc>
+    <lastmod>2015-01-22T18:21:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2014/09/raspberry-pi-wifi-setup/</loc>
+    <lastmod>2014-09-18T04:18:47+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2014/08/convert-yaml-files-to-json-in-a-directory/</loc>
+    <lastmod>2014-08-18T20:19:39+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2014/02/re-apples-ssltls-bug/</loc>
+    <lastmod>2014-02-23T03:22:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2014/02/switching-hosts-and-transferring-domain/</loc>
+    <lastmod>2014-02-05T16:03:09+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2013/06/combining-asynchronous-multi-threaded-programmming/</loc>
+    <lastmod>2013-06-16T21:35:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2013/05/adobe-please/</loc>
+    <lastmod>2013-05-13T18:34:06+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2012/10/checking-if-a-string-has-all-unique-characters/</loc>
+    <lastmod>2012-10-24T19:56:41+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2012/10/c-5-0-async-and-await/</loc>
+    <lastmod>2012-10-16T00:05:57+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2012/06/web-development/</loc>
+    <lastmod>2012-06-07T14:14:23+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/07/new-projects/</loc>
+    <lastmod>2011-07-26T18:02:12+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/07/problem-20-a-k-a-who-knew-how-simple-python-could-be/</loc>
+    <lastmod>2011-07-07T20:07:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/07/python/</loc>
+    <lastmod>2011-07-07T16:53:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/07/problems-18-and-67/</loc>
+    <lastmod>2011-07-04T07:01:24+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/07/problem-15/</loc>
+    <lastmod>2011-07-03T04:05:27+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/07/problem-14/</loc>
+    <lastmod>2011-07-03T03:18:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/07/problem-13/</loc>
+    <lastmod>2011-07-01T04:15:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/07/bigint/</loc>
+    <lastmod>2011-07-01T04:04:44+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/06/problem-11/</loc>
+    <lastmod>2011-06-27T03:34:25+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/06/problem-9/</loc>
+    <lastmod>2011-06-27T01:23:42+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/2011/06/problem-4/</loc>
+    <lastmod>2011-06-24T03:40:42+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/blog/</loc>
+    <lastmod>2015-05-31T15:53:52-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://erdaniels.com/</loc>
+    <lastmod>2015-05-31T15:53:52-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

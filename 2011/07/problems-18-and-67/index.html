@@ -1,0 +1,254 @@
+  <!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en-us'>
+<head>
+  <link href='http://gmpg.org/xfn/11' rel='profile'>
+  <meta http-equiv='content-type' content='text/html; charset=utf-8'>
+
+  
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+
+  <title> Problems 18 and 67  &middot; Eric Daniels - Software Engineer </title>
+
+  
+  <link href='/css/bootstrap-pagination.css' rel='stylesheet' type='text/css'>
+  <link href='/css/poole.css' rel='stylesheet' type='text/css'>
+  <link href='/css/syntax.css' rel='stylesheet' type='text/css'>
+  <link href='/css/hyde.css' rel='stylesheet' type='text/css'>
+  <link href='/css/highlightjs.css' rel='stylesheet' type='text/css'>
+  <link href='/css/solarized_dark.min.css' rel='stylesheet' type='text/css'>
+  <link href='/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400italic,700italic|Raleway:400,300' rel='stylesheet' type='text/css'>
+
+  
+  <script src='/js/highlight.js'></script>
+  <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  <script type='text/x-mathjax-config'>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: 'AMS'},
+           extensions: ['AMSmath.js', 'AMSsymbols.js'] }
+    }
+  });
+  </script>
+
+  <script type='text/x-mathjax-config'>
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+  </script>
+
+  
+  <link rel='apple-touch-icon-precomposed' sizes='144x144' href='/apple-touch-icon-144-precomposed.png'>
+  <link rel='shortcut icon' href='/favicon.png'>
+
+  
+  <link href='' rel='alternate' type='application/rss+xml' title='Eric Daniels - Software Engineer'/>
+
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+
+  
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-63597536-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+
+    <div class="sidebar-about">
+      <h1 class="brand"><a href="https://erdaniels.com">Eric Daniels</a></h1>
+      <p class="lead">
+         code; stuff; 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://erdaniels.com/blog/">Blog Posts</a></li>
+      
+    </ul>
+
+    <a href="https://www.facebook.com/EricDaniels"><i class="fa fa-facebook-square"></i></a>&nbsp;&nbsp;
+    <a href="https://github.com/edaniels"><i class="fa fa-github-square"></i></a>&nbsp;&nbsp;
+    <a href="https://www.linkedin.com/in/erdaniels"><i class="fa fa-linkedin-square"></i></a>&nbsp;&nbsp;
+    
+    <a href="https://twitter.com/ericrdaniels"><i class="fa fa-twitter-square"></i></a>&nbsp;&nbsp;
+
+    <p class="footnote">
+      Created with <a href="//gohugo.io">Hugo</a>
+      <br/>
+      <a href="//github.com/edaniels/erdanielsdotcom-theme">Theme</a> based off of <a href="//github.com/natefinch/npf">npf.io</a>
+      <br/>
+      &copy; 2016 Eric Daniels. All rights reserved.
+    </p>
+    
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+        <h1 class="post-title">Problems 18 and 67</h1>
+        <span class="post-date">Jul 4, 2011</span>
+
+        <p>Problems 18 &amp; 67</p>
+
+<blockquote>
+By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
+</blockquote>
+
+<pre><code>3 
+7 4
+2 4 6
+8 5 9 3
+</code></pre>
+
+<blockquote>
+That is, $3 + 7 + 4 + 9 = 23$.
+
+Find the maximum total from top to bottom of the triangle below:
+</blockquote>
+
+<p></p>
+
+<p>The only difference between these two problems is the size of the triangle; one spans 15 lines while the other 100. Like it says in a note at the bottom of the problem, it would take too long to brute force every possible path and in my opinion that approach would be too complicated.</p>
+
+<p>The way my algorithm and a lot of other people&rsquo;s algorithms for this problem works is by starting from either the top or bottom of the triangle (in mine, the bottom), you have the computer calculate the max value for the path from a row above the bottom to the bottom. The algorithm always uses two rows and updates the top row as it passes through. There can only be two possible new values per value in the top row. This allows us to collapse the triangle upon each iteration and speed up the process.</p>
+
+<p>At first I didn&rsquo;t understand the problem and I thought it was just asking what is the sum of the path of the highest adjacent numbers. Obviously that was wrong but it created an interesting point. It is best to start at the bottom because you do not know how numbers below the current row you are on will affect the sum. But if you start from the bottom you already know what the max values for that path can be. Also, if you were to start from the top with the same algorithm, you would have to search for the maximum value in the last row to get your answer as opposed to having the top contain one element.</p>
+
+<p>Some memory is wasted in my array declaration since it is not truly <code>[15][15]</code> but C++ is needy like that and doesn&rsquo;t support jagged arrays as far as I know.</p>
+
+<pre><code class="language-cpp">void calcMaxTriangleRow (BigInt top[], BigInt bottom[], int bottomSize)
+{
+	BigInt left, right;
+	int topSize = bottomSize - 1;
+
+	if (bottomSize == 1)
+	{
+		left = bottom[0];
+		right = bottom[1];
+
+		(left &gt; right) ? top[0] = left + top[0] : top[0] = right + top[0];
+	}
+
+	for (int i = 0; i &lt; topSize; i++)
+	{
+		left = bottom[i];
+		right = bottom[i+1];
+
+		(left &gt; right) ? top[i] = left + top[i] : top[i] = right + top[i];
+			
+	}
+}
+</code></pre>
+
+<p>Problem 18:</p>
+
+<pre><code class="language-cpp">BigInt P18 ()
+{
+	BigInt triangle[15][15] = {  {75}, 
+							  {95,64},
+						      {17,47,82},
+						      {18,35,87,10},
+						      {20,4,82,47,65,},
+						      {19,1,23,75,3,34},
+					          {88,2,77,73,7,63,67},
+					          {99,65,4,28,6,16,70,92},
+					          {41,41,26,56,83,40,80,70,33},
+				              {41,48,72,33,47,32,37,16,94,29},
+				              {53,71,44,65,25,43,91,52,97,51,14},
+						      {70,11,33,28,77,73,17,78,39,68,17,57},
+							  {91,71,52,38,17,14,91,43,58,50,27,29,48},
+							  {63,66,4,68,89,53,67,30,73,16,69,87,40,31},
+							  {4,62,98,27,23,9,70,98,73,93,38,53,60,4,23} };
+
+	int size = 15;
+
+	int i = 1;
+
+	while (size &gt; 1)
+	{
+		calcMaxTriangleRow(triangle[15-i-1], triangle[15-i], size--);
+
+		i++;
+	}
+
+	return triangle[0][0];
+}
+</code></pre>
+
+<p>Problem 67:</p>
+
+<pre><code class="language-cpp">BigInt P67 ()
+{
+	fstream triangleTxt = fstream(&quot;triangle.txt&quot;,ios::in);
+
+	BigInt triangle[100][100];
+
+	for (int i = 0; i &lt; 100; i++)
+	{
+		for (int j = 0; j &lt; (i+1); j++)
+			triangleTxt &gt;&gt; triangle[i][j];
+	}
+
+	int size = 100;
+
+	int i = 1;
+
+	while (size &gt; 1)
+	{
+		calcMaxTriangleRow(triangle[100-i-1], triangle[100-i], size--);
+
+		i++;
+	}
+
+	return triangle[0][0];
+}
+</code></pre>
+
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost") 
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'erdaniels';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the comments powered by <a href="http://disqus.com/?ref_noscript">Disqus.</a></noscript>
+      </div>
+    </div> 
+
+  </body>
+</html>
