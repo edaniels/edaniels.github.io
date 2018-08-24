@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - Convert YAML files to JSON in a
+  directory</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">Convert YAML files to JSON in a
+      directory</h1>
+      <p>There is probably a much better way to do this but I got
+      very excited having this all come together. This "one liner"
+      requires the Perl modules JSON::XS and Catmandu.</p>
+      <!--more-->
+      <pre><code class=
+      "language-bash">find dir/subdir -name "*.yml" -execdir sh -c 'catmandu convert YAML to JSON &lt; {} | json_xs &gt; `basename {} .yml`.json' \;
+</code></pre>
+      <p>This is what the script does:</p>
+      <ol>
+        <li>
+          <p>Find all yml files and convert them into their JSON
+          equivalents.</p>
+        </li>
+        <li>
+          <p>Pipe the output into json_xs to prettify the JSON.</p>
+        </li>
+        <li>
+          <p>Output the prettified JSON to the same file but with a
+          json extension.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>

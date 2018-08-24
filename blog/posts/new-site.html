@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - How I Saved Money with Static Site
+  Generation</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">How I Saved Money with Static Site
+      Generation</h1>
+      <p>I've had the same blog running on WordPress for years. My
+      hosting provider has also been the same for a while (<a href=
+      "https://asmallorange.com/">A Small Orange Hosting</a>).
+      While both are great solutions for getting a blog up and
+      running, I am trying to optimize for costs in all aspects of
+      life. First it was my phone bill, and then my gym which both
+      save me about $150 a month. Now it is this site's turn. I
+      decided to do this over this weekend because my domain was up
+      for renewal.</p><!--more-->
+      <h2>WordPress -&gt; Hugo</h2>
+      <p>For a while I knew I wanted a static site but I didn't
+      know what solution I wanted to choose. I ended up going with
+      <a href="https://gohugo.io">hugo</a> since I've been working
+      with go lately. The fact that it's in go doesn't mean much to
+      me since I am not working on hugo; I'm just using it. It's a
+      simple framework that lets me do the only thing I need to do,
+      get blog posts up quickly. Furthermore, it's static. I've
+      never had any kind of content on my site that needs to be
+      loaded dynamically. Getting hugo set up was painless; getting
+      a theme customized to my liking took a little longer but was
+      still straightforward.</p>
+      <h2>ASO -&gt; AWS</h2>
+      <p>ASO wasn't really costing me much money a year but next
+      year it would have cost me about $36 to run my simple site. I
+      decided to get a free tier subscription on AWS since this
+      would give me a whole year for free. A t2.micro is all I need
+      for a site like this. It gets very few hits and needs barely
+      any CPU power to function. After this year, I will invest
+      some time into spot instances and see if a t1.micro will suit
+      the site.</p>
+      <h2>HTTP -&gt; HTTPS & HTTP/2</h2>
+      <p>This part has nothing to do with saving money and more
+      with being an early adopter. I heard about <a href=
+      "https://github.com/h2o/h2o">H2O</a> on Hacker News and I
+      recalled it having HTTP/2 support. I decided to give it a go
+      and it was a piece of cake to get the server up and running
+      with a new SSL cert and serving HTTP/2 if clients ask for it.
+      This also allowed me to get an A+ on the <a href=
+      "https://www.ssllabs.com/ssltest/analyze.html?d=erdaniels.com">
+      Qualys SSL Server Test</a>. The site doesn't need to be
+      secure but it's nice to be secure by default.</p>
+      <h2>Conclusion</h2>
+      <p>This was a pretty simple move that will save me (excluding
+      SSL) about $7-9 on hosting my site. I could have also chosen
+      to host the site on GitHub Pages or on some other free
+      hosting but this was a nice way to try some new software
+      out.</p>
+      <p>If you want to see the configuration of this site and the
+      code running it, check out the repo at <a href=
+      "https://github.com/edaniels/erdanielsdotcom-config">https://github.com/edaniels/erdanielsdotcom-config</a></p>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>

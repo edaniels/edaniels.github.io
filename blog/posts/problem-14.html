@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - Problem 14</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">Problem 14</h1>
+      <blockquote>
+        The following iterative sequence is defined for the set of
+        positive integers:
+      </blockquote>
+      <blockquote>
+        $ n = \left\{ \begin{array}{ll} \frac{n}{2} & \mbox{if n is
+        even} \\ 3*n + 1 & \mbox{if n is odd} \end{array} \right. $
+      </blockquote>
+      <blockquote>
+        Using the rule above and starting with 13, we generate the
+        following sequence:
+        <p>13 40 20 10 5 16 8 4 2 1 It can be seen that this
+        sequence (starting at 13 and finishing at 1) contains 10
+        terms. Although it has not been proved yet (Collatz
+        Problem), it is thought that all starting numbers finish at
+        1.</p>
+        <p>Which starting number, under one million, produces the
+        longest chain?</p>
+        <p>NOTE: Once the chain starts the terms are allowed to go
+        above one million.</p>
+      </blockquote><!--more-->
+      <p>Simple and quick brute force solution</p>
+      <pre><code class=
+      "language-cpp">long long P14 (long long target)
+{
+        long long current = target;
+        long long chainLength = 0;
+        long long count = target;
+        long long longestChain[2] = {count, chainLength};
+
+        while (count &gt; 1)
+        {
+                while (current &gt; 1)
+                {
+                        if (current % 2 == 0)
+                                current /= 2;
+                        else
+                                current = (current*3) + 1;
+
+                        chainLength++;
+                }
+
+                if (chainLength &gt; longestChain[1])
+                {
+                        longestChain[0] = count;
+                        longestChain[1] = chainLength;
+                }
+
+                count--;
+                current = count;
+                chainLength = 0;
+        }
+
+        return longestChain[0];
+}
+</code></pre>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>

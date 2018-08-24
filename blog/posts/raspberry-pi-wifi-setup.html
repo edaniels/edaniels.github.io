@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - Raspberry Pi WiFi Setup</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">Raspberry Pi WiFi Setup</h1>
+      <p>I just recently ordered a Raspberry Pi Model B+ (yay!) and
+      ordered an Edimax EW-7811Un WiFi dongle to go with it. Here's
+      how to set it up on Raspbian.</p><!--more-->
+      <ol>
+        <li>
+          <p>Make your <code>/etc/network/interfaces</code> look
+          like this:</p>
+          <pre><code class="language-bash">auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+</code></pre>
+        </li>
+        <li>
+          <p>Make
+          your&nbsp;<code>/etc/wpa_supplicant/wpa_supplicant.conf</code>
+          look like this:</p>
+          <pre><code class=
+          "language-bash">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+ssid="whyfi"
+psk="yourpassword"
+}
+</code></pre>
+        </li>
+        <li>
+          <p><code>sudo ifdown wlan0</code></p>
+        </li>
+        <li>
+          <p><code>sudo ifup wlan</code></p>
+        </li>
+      </ol>
+      <p>This assumes everything will work for you the way it did
+      for me. My network is a WPA2-Personal network and only
+      setting said and psk with wpa_supplicant did the job.</p>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>

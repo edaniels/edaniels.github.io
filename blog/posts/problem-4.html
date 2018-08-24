@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - Problem 4</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">Problem 4</h1>
+      <blockquote>
+        A palindromic number reads the same both ways. The largest
+        palindrome made from the product of two 2-digit numbers is
+        9009 = 91&nbsp;× 99.
+        <p>Find the largest palindrome made from the product of two
+        3-digit numbers.</p>
+      </blockquote><!--more-->
+      <p>This problem isn't very complicated. Basically we need to
+      have a nested loop that literates through 100-999 (represents
+      all 3 digit numbers) and multiply i by j. Then we check i*j
+      if it is a palindrome (i.e. &nbsp;12321). We then store this
+      in a variable outside the scope of both loops as the largest
+      palindrome.</p>
+      <p>The first problem is that if both of the loops start from
+      100 and go to 999, then we will have at least $i - 1$
+      duplicates for each completion of the j for loop. This is
+      because there will be a previous&nbsp;occurrence&nbsp;of
+      $i<em>j$ that will be $j</em>i$ (i.e. $1<em>2$ (i=1, j=2)
+      $2</em>1$ (i=2, j=1)). To avoid this we just start $j$ at the
+      current $i$ instead.</p>
+      <p>This reduces the amount of palindromes from $n^2$ to
+      $\sum_{i=1}^n i$ or $\frac{n}{2} (n+1)$ where n is the amount
+      of numbers to try. In this case it is 900. So we have saved
+      404550 duplicate palindrome checks (810000 - 404450). This
+      number will approach exactly half of n as n approaches
+      infinity. Therefore this method is much more efficient and
+      scalable.</p>
+      <p>To check for palindromes we just need to reverse the
+      number in question as a string and check the number in
+      question as a string.</p>
+      <p>Here is the source code for the solution and reverse
+      function.</p>
+      <pre><code class="language-cpp">int P4 ()
+{
+        char *test = new char[20];
+
+        int largest = 0;
+
+        int tempNum;
+
+        for (int i = 100; i &lt;= 999; i++)
+
+                // Eliminate doubling up on previous multiplications
+                for (int j = i; j &lt;= 999; j++) { 
+                        tempNum = i * j;                        
+                        if ( 
+                              string(itoa(tempNum,test,10)).compare(reverse(string(itoa(tempNum,test,10)))) == 0 &amp;& (tempNum) &gt; largest
+                           )
+
+                                largest = tempNum;
+
+                }
+
+        delete test;
+
+        return largest;
+}
+
+string reverse (string in)
+{
+        char temp;
+
+        for (int i = 0; i &lt; in.length()/2; i++)
+        {
+                temp = in[i];
+
+                in[i] = in.at(in.length() - i - 1);
+
+                in[in.length() - i - 1] = temp;
+        }
+
+        return in;
+}
+</code></pre>
+      <p>The full source code is avaliable at&nbsp;<a href=
+      "https://github.com/edaniels/Euler">https://github.com/edaniels/Euler</a>
+      or&nbsp;<a href=
+      "http://erdaniels.com/sourcecode/Euler/Problem%204/">http://erdaniels.com/sourcecode/Euler/Problem
+      4/</a></p>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>

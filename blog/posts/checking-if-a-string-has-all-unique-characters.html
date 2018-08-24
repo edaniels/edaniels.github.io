@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - Checking if a string has all unique
+  characters</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">Checking if a string has all unique
+      characters</h1>
+      <p>That awkward moment when you realized you forgot so much
+      of the python you learned.</p>
+      <p>I would like this to be the start of a series where I
+      solve commonly asked programming questions in C++ and then in
+      Python. It is&nbsp;extremely&nbsp;useful to be able to
+      solve&nbsp;the same&nbsp;problem in two different types of
+      languages. For me, it helps me build a better understanding
+      of both languages and shows where one language might be
+      favorable over another.</p>
+      <p>Let's get started.</p><!--more-->
+      <p>First let us assume that string is to be represented in
+      ASCII.&nbsp;Therefore&nbsp;there are 256&nbsp;choices that a
+      character can be in the string.</p>
+      <p>If we were to count the&nbsp;occurrences&nbsp;of every
+      character, we would be able to decide whether the string is
+      unique.</p>
+      <p>Now the solution comes pretty simply:</p>
+      <h2>C++</h2>
+      <pre><code class="language-cpp">bool isUnique(string input) {
+     int occurrences[256] = {0};
+     for (int i = 0; i &lt; input.length(); ++i)
+          if ( ++occurrences[input[i]] &gt; 1 )
+               return false;
+     return true;
+}
+</code></pre>
+      <h2>Python 3</h2>
+      <pre><code class="language-python">
+def isUnique(input):
+
+     occurrences = [0 for i in range(256)]
+
+     for character in input:
+          occurrences[ord(character)] += 1
+          if occurrences[ord(character)] &gt; 1:
+               return False
+     return True
+
+if __name__ == '__main__':
+     choice = input("Enter in a string to see if it has all unique characters: ")
+     if isUnique(choice):
+          print('True')
+     else:
+          print('False')
+
+</code></pre>
+      <p>I prefer the C++ solution here because we don't need to
+      use any function to get the ASCII value of a character like
+      we do in python with ord(). We also have the benefit here of
+      the prefix increment operator in C++ which lets us shorten
+      the code.</p>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>

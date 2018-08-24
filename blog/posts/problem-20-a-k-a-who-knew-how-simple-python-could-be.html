@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - Problem 20 (a.k.a. Who knew how simple
+  python could be?)</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">Problem 20 (a.k.a. Who knew how simple
+      python could be?)</h1>
+      <blockquote>
+        n! means n x (n - 1) ... 3 x 2 x 1
+        <p>For example, 10! = 10 x 9 ... 3 x 2 x 1 = 3628800, and
+        the sum of the digits in the number 10! is 3 + 6 + 2 + 8 +
+        8 + 0 + 0 = 27.</p>
+        <p>Find the sum of the digits in the number 100!</p>
+      </blockquote><!--more-->
+      <p>This literally took a minute to write-up in python:</p>
+      <pre><code class="language-python">import math
+
+def problem_20(target):
+
+        factorial_num = str(math.factorial(target))
+
+        sum = 0
+
+        for number in factorial_num:
+                sum += int(number)
+        
+        return sum
+        
+print(problem_20(100))
+</code></pre>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>

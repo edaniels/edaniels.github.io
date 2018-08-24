@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - Debugging/Fixing a Third-Party Go Package
+  Bug</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">Debugging/Fixing a Third-Party Go
+      Package Bug</h1>
+      <p>MongoDB's product, MMS, uses Go for all of the agents that
+      run on MMS (Monitoring, Backup, Automation) as well as for
+      some small utilities. All of these binaries use the <a href=
+      "https://github.com/winlabs/gowin32">gowin32</a> package in
+      some form or another. I have recently begun working on a
+      feature in the Automation agent that requires gowin32 and I
+      noticed when writing code like the following that my binary
+      would crash:</p><!--more-->
+      <pre><code class="language-go">package main
+
+import (
+        _ "github.com/winlabs/gowin32"
+)
+
+func main() {
+        _ = 0
+}
+</code></pre>
+      <p>The fatal error that occurred was:</p>
+      <pre><code class=
+      "language-runtime:">fatal error: invalid heap pointer```
+
+On the other hand, adding a print statement suppressed the crashing behavior:
+
+```go
+package main
+
+import (
+        _ "github.com/winlabs/gowin32"
+)
+
+func main() {
+        _ = 0
+        fmt.Println("Stop crashing")
+}
+</code></pre>
+      <p>Adding the <code>Println</code> was essentially a red
+      herring and threw me off for a bit. This was the first time
+      that I encountered an issue like this in Go and as such I
+      didn't apply much common sense as to what that error message
+      meant.</p>
+      <p>A key hint as to what's going on here is the fact that I
+      was using Go 1.4. All of the agent code is currently using Go
+      1.3 and the error never occurred there.</p>
+      <h2>The Poor Man's Debugger</h2>
+      <p>My first thought was that if I'm importing a package and
+      it crashes without actually using anything from it, then
+      there must be some kind of <code>init()</code> or side-effect
+      that causes the invalid heap pointer. Of course gowin32 has
+      no <code>init()</code>s but it has global (package-scoped)
+      variables all over the place. The problem was finding out
+      which <code>var</code> was screwing me over.</p>
+      <p>The best idea I could think of at the time was to simply
+      start deleting source files until the crash disappeared. It
+      took a while to find it, but <em>winuser.go</em> was the
+      culprit. Thankfully it was a small file and the global
+      variables were causing the crash.</p>
+      <h2>Realizing the Bug</h2>
+      <p>According to the Go 1.4 <a href=
+      "https://golang.org/doc/go1.4">release notes</a>, as of Go
+      1.3, the runtime is supposed to crash when it finds a memory
+      word that should hold a valid pointer within the Go runtime.
+      This means that a value like 7 in a <code>*uint16</code>
+      should crash the runtime. Looking at
+      <code>MAKEINTRESOURCE</code> in <em>winuser.go</em>, it was
+      taking a <code>uint16</code> and literally converting it into
+      a <code>*uint16</code>. The Windows predefined RT_* resources
+      range from 1-24 which clearly would count as invalid
+      pointers. But why did this work in Go 1.3 if the runtime
+      should crash during garbage collection? It turns out the
+      garbage collector in Go 1.3 ignored invalid pointers that are
+      located on the heap (see <a href=
+      "https://github.com/golang/go/issues/9454#issuecomment-68169315">
+      https://github.com/golang/go/issues/9454#issuecomment-68169315</a>).</p>
+      <h2>Reproducing the Bug</h2>
+      <p>After realizing what was going on, I just wanted to prove
+      I was right. Coming up with the following reproduction was
+      simple and nice to explain:</p>
+      <pre><code class="language-go">package main
+
+import (
+    "runtime"
+    "unsafe"
+)
+
+func MAKEINTRESOURCE(integer uint16) *uint8 {
+    return (*uint8)(unsafe.Pointer(uintptr(integer)))
+}
+
+var (
+    test1 = MAKEINTRESOURCE(1)
+)
+
+func main() {
+    runtime.GC()
+}
+</code></pre>
+      <p>Forcing the garbage collector to run would always crash
+      the runtime with an invalid heap pointer in this example.</p>
+      <h2>Fixing the Bug</h2>
+      <p>This fix was nice and short. I swapped out the
+      <code>*uint16</code> for a uintptr which is designed to hold
+      the memory address value as an integral value. Being an
+      integral type and not a pointer, it doesn't get treated as a
+      pointer in the runtime. This enables us to pass around the
+      Windows <code>Resource</code> references all over the code
+      and all the way down to the syscalls. Thankfully this fix was
+      also backwards compatible with existing code due to type
+      aliasing of the original <code>*uint16</code> from
+      <code>MAKEINTRESOURCE</code>.</p>
+      <p>For the actual pull request, see <a href=
+      "https://github.com/winlabs/gowin32/pull/38">https://github.com/winlabs/gowin32/pull/38</a>.</p>
+      <h2>Retrospective</h2>
+      <p>It turns out that this bug was keeping us from upgrading
+      to Go 1.4 on the binaries that were using gowin32. I wasn't
+      aware of this since I stumbled on the bug in my free time.
+      Another engineer came to the same conclusion as to what was
+      wrong but arrived at the answer in a different way. In
+      retrospect, I would have solved this faster had I actually
+      looked for the JIRA ticket; but it was a nice exercise in
+      debugging and I learned a lot more about Go internals.</p>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>

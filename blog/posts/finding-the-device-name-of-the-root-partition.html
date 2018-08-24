@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Eric Daniels - Finding the device name of the root
+  partition</title>
+  <link href="/static/css/style.css" rel="stylesheet" type=
+  "text/css">
+</head>
+<body>
+  <header class="container">
+    Eric Daniels - <a href="/">Home</a>&nbsp; <a href=
+    "/blog">Blog</a>&nbsp; <a href="/about">About</a>
+    <hr>
+  </header>
+  <div class="content container">
+    <div class="post">
+      <h1 class="post-title">Finding the device name of the root
+      partition</h1>
+      <p>I thought this could be useful for someone trying to
+      figure out the device name that a certain directory belongs
+      to. In this example I am using /</p><!--more-->
+      <pre><code class=
+      "language-bash">ROOT_PART=$(echo /dev/$(lsblk -P | grep -i "mountpoint=\"/\"" | awk '{print $1}' | cut -d "=" -f2 | sed -e 's/^"//' -e 's/"$//'))
+</code></pre>
+      <p>If lsblk isn't available for some reason you can also use
+      df and awk:</p>
+      <pre><code class=
+      "language-bash">ROOT_PART=$(df / | awk '/^\/dev/ {print $1}')
+</code></pre>
+    </div>
+  </div>
+  <footer class="container">
+    <hr>
+    <a href=
+    "https://github.com/edaniels">GitHub</a>&nbsp;&nbsp;<a href=
+    "https://www.linkedin.com/in/erdaniels">LinkedIn</a>&nbsp;&nbsp;<a href="mailto:eric@erdaniels.com">Contact</a>
+    <div id="build-marker">
+      🔨 with <a href="https://github.com/edaniels/sgs">sgs</a> on
+      <span id="build-info">Fri, 24 Aug 2018 21:38:21 GMT (<a href=
+      "https://github.com/edaniels/erdanielsdotcom/commit/0aeda5e">0aeda5e</a>)</span>
+    </div>
+  </footer>
+</body>
+</html>
