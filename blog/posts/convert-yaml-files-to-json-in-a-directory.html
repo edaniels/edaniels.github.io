@@ -5,10 +5,8 @@
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  <title>Eric Daniels - Random</title>
-  <style>
-      img { width: 100%; height: 100% }
-  </style>
+  <title>Eric Daniels - Convert YAML files to JSON in a
+  directory</title>
 </head>
 <body>
   <header class="container">
@@ -19,9 +17,30 @@
   </header>
   <div class="content container">
     <div class="post">
-    <h1 class="post-title">Random (4/2026)</h1><img src=
-    "/static/photos/random/leaves1.png"><img src=
-    "/static/photos/random/red_green.png"></div>
+      <h1 class="post-title">Convert YAML files to JSON in a
+      directory</h1>
+      <p>There is probably a much better way to do this but I got
+      very excited having this all come together. This "one liner"
+      requires the Perl modules JSON::XS and Catmandu.</p>
+      <!--more-->
+      <pre><code class=
+      "language-bash">find dir/subdir -name "*.yml" -execdir sh -c 'catmandu convert YAML to JSON &lt; {} | json_xs &gt; `basename {} .yml`.json' \;
+</code></pre>
+      <p>This is what the script does:</p>
+      <ol>
+        <li>
+          <p>Find all yml files and convert them into their JSON
+          equivalents.</p>
+        </li>
+        <li>
+          <p>Pipe the output into json_xs to prettify the JSON.</p>
+        </li>
+        <li>
+          <p>Output the prettified JSON to the same file but with a
+          json extension.</p>
+        </li>
+      </ol>
+    </div>
   </div>
   <footer class="container">
     <hr>

@@ -5,10 +5,8 @@
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  <title>Eric Daniels - Random</title>
-  <style>
-      img { width: 100%; height: 100% }
-  </style>
+  <title>Eric Daniels - Problem 20 (a.k.a. Who knew how simple
+  python could be?)</title>
 </head>
 <body>
   <header class="container">
@@ -19,9 +17,32 @@
   </header>
   <div class="content container">
     <div class="post">
-    <h1 class="post-title">Random (4/2026)</h1><img src=
-    "/static/photos/random/leaves1.png"><img src=
-    "/static/photos/random/red_green.png"></div>
+      <h1 class="post-title">Problem 20 (a.k.a. Who knew how simple
+      python could be?)</h1>
+      <blockquote>
+        n! means n x (n - 1) ... 3 x 2 x 1
+        <p>For example, 10! = 10 x 9 ... 3 x 2 x 1 = 3628800, and
+        the sum of the digits in the number 10! is 3 + 6 + 2 + 8 +
+        8 + 0 + 0 = 27.</p>
+        <p>Find the sum of the digits in the number 100!</p>
+      </blockquote><!--more-->
+      <p>This literally took a minute to write-up in python:</p>
+      <pre><code class="language-python">import math
+
+def problem_20(target):
+
+        factorial_num = str(math.factorial(target))
+
+        sum = 0
+
+        for number in factorial_num:
+                sum += int(number)
+        
+        return sum
+        
+print(problem_20(100))
+</code></pre>
+    </div>
   </div>
   <footer class="container">
     <hr>

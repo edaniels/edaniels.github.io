@@ -5,10 +5,8 @@
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  <title>Eric Daniels - Random</title>
-  <style>
-      img { width: 100%; height: 100% }
-  </style>
+  <title>Eric Daniels - Finding the device name of the root
+  partition</title>
 </head>
 <body>
   <header class="container">
@@ -19,9 +17,20 @@
   </header>
   <div class="content container">
     <div class="post">
-    <h1 class="post-title">Random (4/2026)</h1><img src=
-    "/static/photos/random/leaves1.png"><img src=
-    "/static/photos/random/red_green.png"></div>
+      <h1 class="post-title">Finding the device name of the root
+      partition</h1>
+      <p>I thought this could be useful for someone trying to
+      figure out the device name that a certain directory belongs
+      to. In this example I am using /</p><!--more-->
+      <pre><code class=
+      "language-bash">ROOT_PART=$(echo /dev/$(lsblk -P | grep -i "mountpoint=\"/\"" | awk '{print $1}' | cut -d "=" -f2 | sed -e 's/^"//' -e 's/"$//'))
+</code></pre>
+      <p>If lsblk isn't available for some reason you can also use
+      df and awk:</p>
+      <pre><code class=
+      "language-bash">ROOT_PART=$(df / | awk '/^\/dev/ {print $1}')
+</code></pre>
+    </div>
   </div>
   <footer class="container">
     <hr>
